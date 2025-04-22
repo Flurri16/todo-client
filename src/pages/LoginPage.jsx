@@ -9,7 +9,7 @@ const LoginPage = () => {
   const navigate = useNavigate()
   const loginUser = async () => {
     try {
-      const { data } = await axios.post('http://localhost:5000/api/auth/login', {
+      const { data } = await axios.post('https://todo-back-y91r.onrender.com/api/auth/login', {
         username,
         password,
       });

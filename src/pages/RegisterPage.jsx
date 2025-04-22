@@ -10,7 +10,7 @@ const RegisterPage = () => {
   const navigate = useNavigate()
   const registerUser = async () => {
     try {
-      const { data } = await axios.post('http://localhost:5000/api/auth/register', {
+      const { data } = await axios.post('https://todo-back-y91r.onrender.com/api/auth/register', {
         username,
         password,
       });

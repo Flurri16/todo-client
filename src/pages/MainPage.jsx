@@ -11,7 +11,7 @@ export default function MainPage() {
   
   const createTodo = async () => {
     try {
-      const { data } = await axios.post('http://localhost:5000/api/todo/add', { title: todo }, { headers: { Authorization: `Bearer ${token}` } })
+      const { data } = await axios.post('https://todo-back-y91r.onrender.com/api/todo/add', { title: todo }, { headers: { Authorization: `Bearer ${token}` } })
       if (!todo.trim()) {
         toast.error("Нельзя добавить пустую задачу!");
         return;
@@ -30,7 +30,7 @@ export default function MainPage() {
   }
   const getTodos = async () => {
     try {
-      const { data } = await axios.get('http://localhost:5000/api/todo/getAll', { headers: { Authorization: `Bearer ${token}` } })
+      const { data } = await axios.get('https://todo-back-y91r.onrender.com/api/todo/getAll', { headers: { Authorization: `Bearer ${token}` } })
       setTodos(data.todos)
     } catch (err) {
       console.log(err);
@@ -39,7 +39,7 @@ export default function MainPage() {
   }
   const removeTodo = async (id) => {
     try {
-      const {data} = await axios.delete(`http://localhost:5000/api/todo/delete/${id}`, {headers: { Authorization: `Bearer ${token}`}})
+      const {data} = await axios.delete(`https://todo-back-y91r.onrender.com/api/todo/delete/${id}`, {headers: { Authorization: `Bearer ${token}`}})
       toast(data.message)
       getTodos()
     } catch(err) {
@@ -48,7 +48,7 @@ export default function MainPage() {
   }
   const completed = async (id) => {
     try {
-      const { data } = await axios.patch(`http://localhost:5000/api/todo/complited/${id}`, {}, {headers: { Authorization: `Bearer ${token}` }});
+      const { data } = await axios.patch(`https://todo-back-y91r.onrender.com/api/todo/complited/${id}`, {}, {headers: { Authorization: `Bearer ${token}` }});
       toast(data.message);
       getTodos(); // <--- Важно!
     } catch (err) {
@@ -58,7 +58,7 @@ export default function MainPage() {
   };
   const importantt = async (id) => {
     try {
-      const { data } = await axios.patch(`http://localhost:5000/api/todo/important/${id}`, {}, {headers: { Authorization: `Bearer ${token}` }});
+      const { data } = await axios.patch(`https://todo-back-y91r.onrender.com/api/todo/important/${id}`, {}, {headers: { Authorization: `Bearer ${token}` }});
       toast(data.message);
       getTodos(); // <--- Важно!
     } catch (err) {
