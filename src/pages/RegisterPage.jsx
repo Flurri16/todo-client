@@ -22,14 +22,12 @@ const RegisterPage = () => {
         setTimeout(() => {
           navigate('/');
         }, 2000);
-      } else {
-        toast.error(data.message || 'Ошибка регистрации');
-      }
+      } 
     } catch (err) {
       if (err.response.data.message) {
         toast.error(err.response.data.message);
       } else {
-        alert('Произошла ошибка при авторизации');
+        alert('Произошла ошибка при регистрации');
       }
     } finally {
       setUsername('');
