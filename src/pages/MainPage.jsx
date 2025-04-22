@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import TodoItem from './TodoItem';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
@@ -28,15 +28,18 @@ export default function MainPage() {
       }
     }
   }
-  const getTodos = async () => {
+  const getTodos = useCallback(async () => {
     try {
-      const { data } = await axios.get('https://todo-back-y91r.onrender.com/api/todo/getAll', { headers: { Authorization: `Bearer ${token}` } })
-      setTodos(data.todos)
+      const { data } = await axios.get('https://todo-back-y91r.onrender.com/api/todo/getAll', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setTodos(data.todos);
     } catch (err) {
       console.log(err);
       toast.error("Не удалось получить список задач");
     }
-  }
+  }, [token]);
+  
   const removeTodo = async (id) => {
     try {
       const {data} = await axios.delete(`https://todo-back-y91r.onrender.com/api/todo/delete/${id}`, {headers: { Authorization: `Bearer ${token}`}})
@@ -68,7 +71,7 @@ export default function MainPage() {
   };
   useEffect(() => {
     if (token) getTodos()
-  }, [token])
+  }, [getTodos, token])
   return (
     <div className="max-w-4xl mx-auto px-4">
       {isAuth ? (
