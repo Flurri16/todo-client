@@ -26,8 +26,11 @@ const RegisterPage = () => {
         toast.error(data.message || 'Ошибка регистрации');
       }
     } catch (err) {
-      console.error(err);
-      alert('Произошла ошибка при регистрации');
+      if (err.response.data.message) {
+        toast.error(err.response.data.message);
+      } else {
+        alert('Произошла ошибка при авторизации');
+      }
     } finally {
       setUsername('');
       setPassword('');
